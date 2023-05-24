@@ -7,11 +7,11 @@ function Landing() {
         backgroundImage: `url(${imageUrl})`,
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center center',
-        animation: 'rotate 10s linear infinite',
-      };    return (
-        <section className="sect-landing d-flex flex-column justify-content-center min-vh-100">
-            <div className="overlay" style={styles}></div>
+        backgroundPosition: 'right',
+    };
+     return (
+        <section className="sect-landing" style={styles}>
+            <div className="overlay"></div>
             <div className="container">
                 <div className="row">
                     <div className="col-lg-6">

@@ -10,6 +10,37 @@ const Card = ({ title, image, description }) => {
       </div>
     </div>
   );
-}
+};
 
-export default Card;
+const Cards = () => {
+  return (
+    <div className="container my-5">
+      <div className="row">
+        <div className="col-sm-4">
+          <Card
+            title="Example Card 1"
+            image="path/to/image1.jpg"
+            description="This is the description for Example Card 1."
+          />
+        </div>
+        <div className="col-sm-4">
+          <Card
+            title="Example Card 2"
+            image="path/to/image2.jpg"
+            description="This is the description for Example Card 2."
+          />
+        </div>
+
+        <div className="col-sm-4">
+          <Card
+            title="Example Card 3"
+            image="path/to/image3.jpg"
+            description="This is the description for Example Card 3."
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Cards;
