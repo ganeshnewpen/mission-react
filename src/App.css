@@ -21,14 +21,14 @@
   border: 1px solid #eee;
 }
 
-nav ul li a.nav-link {
+nav ul li a, .navbar-brand{
   color: #fff;
+  text-decoration: none !important;
 }
 
-nav ul li a.nav-link:hover {
+nav ul li a:hover {
   color: #d7d7d7;
 }
-
 
 /* landing section  */
 .sect-landing {
