@@ -1,25 +1,12 @@
+// Landing.jsx
 import React from 'react';
+import Banner from './banner';
 
-function Landing() {
-    const imageUrl = 'https://img.freepik.com/free-photo/globe-technology-business-with-gradient-wallpaper_53876-97642.jpg?w=826&t=st=1683388481~exp=1683389081~hmac=39367f27b8171d1e6c7234e4007bdef98b1fa0fb517ae1103b57b9f207eb6cbd';
+const Landing = () => {
+  const imageUrl = 'https://t3.ftcdn.net/jpg/04/42/06/34/360_F_442063430_OjLo5sHK0twuUk2hCGWpjLphEHiLcamL.jpg';
+  const title = 'Hi! I am Ganesh Neupane';
 
-    const styles = {
-        backgroundImage: `url(${imageUrl})`,
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'right',
-    };
-     return (
-        <section className="sect-landing" style={styles}>
-            <div className="overlay"></div>
-            <div className="container">
-                <div className="row">
-                    <div className="col-lg-6">
-                        <h1>Hi! I am Ganesh Neupane</h1>
-                    </div>
-                </div>
-            </div>
-        </section>
-    );
-}
+  return <Banner title={title} imageUrl={imageUrl} />;
+};
+
 export default Landing;

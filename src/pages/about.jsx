@@ -1,19 +1,12 @@
+// About.jsx
 import React from 'react';
+import Banner from '../components/banner';
 
 const About = () => {
-    return (
-        <div className="container mt-5 pt-5">
-            <div className="row">
-                <div className="col-sm-12">
-                    <h1>About Me</h1>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla consequat sem ut risus
-                        fringilla, id cursus justo consequat. Suspendisse potenti. Donec ultricies, elit nec
-                        consectetur tincidunt, ex felis gravida metus, in malesuada neque odio sit amet dolor.
-                    </p>
-                </div>
-            </div>
-        </div>
-    );
+  const imageUrl = 'https://png.pngtree.com/thumb_back/fh260/background/20201009/pngtree-dark-green-cyan-paper-cut-minimalist-background-for-brochure-poster-banner-image_405384.jpg';
+  const title = 'About Me';
+
+  return <Banner title={title} imageUrl={imageUrl} />;
 };
+
 export default About;

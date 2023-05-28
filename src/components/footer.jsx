@@ -2,14 +2,14 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    <footer className="bg-info py-4">
-        <div className="container">
-            <div className="row">
-                <div className="col-sm-12 tex-center text-primary">
-                    <p>&copy;2023</p>
-                </div>
-            </div>
+    <footer className="py-3">
+      <div className="container">
+        <div className="row">
+          <div className="col-sm-12 text-center text-white">
+            <span>&copy;2023 All rights reserved.</span>
+          </div>
         </div>
+      </div>
     </footer>
   );
 };
