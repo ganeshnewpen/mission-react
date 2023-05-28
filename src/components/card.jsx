@@ -2,11 +2,11 @@ import React from 'react';
 
 const Card = ({ title, image, description }) => {
   return (
-    <div className="card rounded">
-      <img src={image} alt={title} className="card-image" />
-      <div className="card-content">
-        <h2 className="card-title my-3">{title}</h2>
-        <p className="card-description">{description}</p>
+    <div className="card">
+      <img src={image} alt={title} className="card-img-top" />
+      <div className="card-body">
+        <h4 className="card-title">{title}</h4>
+        <p className="card-text">{description}</p>
       </div>
     </div>
   );
@@ -14,20 +14,20 @@ const Card = ({ title, image, description }) => {
 
 const Cards = () => {
   return (
-    <div className="container my-5">
+    <div className="container my-5 sect-card">
       <div className="row">
         <div className="col-sm-4">
           <Card
-            title="Example Card 1"
-            image="path/to/image1.jpg"
-            description="This is the description for Example Card 1."
+            title="My Card"
+            image="https://img.choice.com.au/-/media/ecc68d2bdc5145db9aa945049927273f.ashx?w=760"
+            description="My card desc"
           />
         </div>
         <div className="col-sm-4">
           <Card
-            title="Example Card 2"
-            image="path/to/image2.jpg"
-            description="This is the description for Example Card 2."
+            title="My Card 2"
+            image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgmTHN1Og9F5yeKpVaCt93eHnn_NiBPou1mw&usqp=CAU"
+            description="My card desc2"
           />
         </div>
 

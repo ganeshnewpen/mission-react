@@ -1,41 +1,57 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const myLogo = {
-  name: 'Ganesh Neupane',
-  imageUrl: 'https://blog.ganeshneupane.com.np/assets/img/gitavatar.jpg'
-}
+const MyLogo = ({ name, imageUrl }) => {
+  return (
+    <div className="logo-container">
+      <img className="avatar" src={imageUrl} alt={name} />
+    </div>
+  );
+};
 
 const Navbar = () => {
+  const myLogo = {
+    name: 'Ganesh Neupane',
+    imageUrl: 'https://blog.ganeshneupane.com.np/assets/img/gitavatar.jpg'
+  };
+
   return (
     <section className="sect-nav">
       <div className="container">
         <div className="row">
           <div className="col-lg-12">
             <nav className="navbar navbar-expand-lg navbar-light">
-                <Link to="/" className='navbar-brand d-flex align-items-center'>
-                  <div className="logo-container">
-                    <img
-                      className="avatar"
-                      src={myLogo.imageUrl}
-                      alt={'Photo of ' + myLogo.name}
-                    />
-                  </div>
-                  <h4 className='ms-3 text-white'>Ganesh</h4>
-                </Link>
-              <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <Link to="/" className="navbar-brand d-flex align-items-center">
+                <MyLogo name={myLogo.name} imageUrl={myLogo.imageUrl} />
+                <h4 className="ms-3 text-white">Ganesh</h4>
+              </Link>
+              <button
+                className="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
                 <span className="navbar-toggler-icon"></span>
               </button>
               <div className="collapse navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav mx-auto">
-                  <li className="nav-item active">
-                    <a className="nav-link" href="#"><Link to="/">Home</Link></a>
+                  <li className="nav-item">
+                    <Link to="/" className="nav-link" activeClassName="active">
+                      Home
+                    </Link>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="#"><Link to="/about">About</Link></a>
+                    <Link to="/about" className="nav-link" activeClassName="active">
+                      About
+                    </Link>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="#">Contact</a>
+                    <Link to="/contact" className="nav-link" activeClassName="active">
+                      Contact
+                    </Link>
                   </li>
                 </ul>
               </div>

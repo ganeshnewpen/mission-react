@@ -7,6 +7,7 @@ import UseStateComponents from './components/usestates';
 import Landing from './components/landing';
 import Footer from './components/footer';
 import AboutPage from './pages/about.jsx';
+import NotFound from './pages/404.jsx'; // Import the NotFound component
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="*" element={<NotFound />} /> {/* Add the fallback route */}
       </Routes>
       <Footer />
     </BrowserRouter>
@@ -26,8 +28,9 @@ const HomePage = () => {
     <div>
       <Landing />
       <Card />
-       <UseStateComponents />
+      <UseStateComponents />
     </div>
   );
 };
+
 export default App;

@@ -2,9 +2,12 @@ body::-webkit-scrollbar {
   display: none;
 }
 
-
 body {
   min-height: 100vh;
+}
+
+.min-vh-60 {
+  height: 60vh;
 }
 
 .sect-nav {
@@ -30,13 +33,14 @@ body {
   border: 1px solid #eee;
 }
 
-nav ul li a,
-.navbar-brand {
+.navbar ul li a,
+.navbar ul li a:focus,
+.navbar .navbar-brand {
   color: #fff;
-  text-decoration: none !important;
+  text-decoration: none;
 }
 
-nav ul li a:hover {
+.navbar ul li a:hover {
   color: #d7d7d7;
 }
 
@@ -63,6 +67,15 @@ nav ul li a:hover {
   position: relative;
   z-index: 1;
 }
+
+.sect-card .card {
+  aspect-ratio: 1/1;
+}
+
+.sect-card .card img {
+  aspect-ratio: 5/4;
+}
+
 
 footer {
   background-color: rgb(6, 6, 17);
