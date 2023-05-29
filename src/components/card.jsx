@@ -33,7 +33,7 @@ const Cards = () => {
 
         <div className="col-sm-4">
           <Card
-            title="Example Card 3"
+            title="My Card 3"
             image="path/to/image3.jpg"
             description="This is the description for Example Card 3."
           />

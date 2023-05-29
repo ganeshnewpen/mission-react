@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import FileUpload from './fileupload.jsx'
+import QuantityInput from './quantityinput.jsx';
+import Slider from './slider.jsx';
 
 export default function UseStateComponents() {
     const [isActive, setIsActive] = useState(false);
-    const { register, handleSubmit } = useForm();
 
     const toggleActive = () => {
         setIsActive(!isActive);
@@ -11,13 +12,6 @@ export default function UseStateComponents() {
 
     const buttonClass = isActive ? 'btn btn-success' : 'btn btn-danger';
 
-    const onSubmit = (data) => {
-        console.log(data.username);
-        alert(data.username);
-
-        const file = data.file[0];
-        alert(file.name);
-    };
 
     return (
         <div className="container mb-5">
@@ -29,29 +23,22 @@ export default function UseStateComponents() {
                         </div>
                         <div className="card-body">
                             <div className="row">
-                                <div className="col-lg-6">
+                                <div className="col-lg-4">
                                     <button className={buttonClass} onClick={toggleActive}>
                                         {isActive ? 'Active' : 'Inactive'}
                                     </button>
                                 </div>
-                                <div className="col-lg-6">
-                                    <form onSubmit={handleSubmit(onSubmit)}>
-                                        <input
-                                            className="form-control"
-                                            type="text"
-                                            {...register('username')}
-                                        />
 
-                                        <input
-                                            type="file"
-                                            accept=".jpg, .jpeg, .png"
-                                            {...register('file')}
-                                        />
+                                <div className="col-lg-4">
+                                    <QuantityInput inputName="quantity" />
+                                </div>
+                                <div className="col-lg-4">
+                                    <FileUpload inputName="file" labelText="Upload your file" />
+                                </div>
 
-                                        <button className="btn btn-secondary mt-3" type="submit">
-                                            Submit
-                                        </button>
-                                    </form>
+                                <div className="col-lg-12">
+                                    <hr />
+                                    <Slider />
                                 </div>
                             </div>
                         </div>
@@ -61,3 +48,4 @@ export default function UseStateComponents() {
         </div>
     );
 }
+

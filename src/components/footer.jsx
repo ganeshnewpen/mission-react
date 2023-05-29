@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    <footer className="py-3">
+    <footer className="py-3 fixed-bottom">
       <div className="container">
         <div className="row">
           <div className="col-sm-12 text-center text-white">
@@ -13,5 +13,4 @@ const Footer = () => {
     </footer>
   );
 };
-
 export default Footer;
