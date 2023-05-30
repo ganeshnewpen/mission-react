@@ -16,7 +16,7 @@ export default function InsertForm() {
       timeoutId = setTimeout(() => {
         setShowSubmittingMessage(false);
         setIsSubmitting(false);
-      }, 1500);
+      }, 1000);
     }
     return () => {
       clearTimeout(timeoutId);
@@ -36,9 +36,12 @@ export default function InsertForm() {
         } else {
           axios.post('http://localhost:3001/users', data)
             .then((response) => {
-              console.log('Data stored successfully:', response.data);
               reset();
               setSuccessMessage('Form submitted successfully');
+              setTimeout(() => {
+                setSuccessMessage(''); // Clear the success message after 2 seconds
+              }, 2000);
+
             })
             .catch(handleError);
         }

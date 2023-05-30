@@ -35,7 +35,6 @@ export default function UseStateComponents() {
                                 <div className="col-lg-4">
                                     <FileUpload inputName="file" labelText="Upload your file" />
                                 </div>
-
                                 <div className="col-lg-12">
                                     <hr />
                                     <Slider />
