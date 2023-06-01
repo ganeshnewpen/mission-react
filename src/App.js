@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
 import Navbar from './components/navbar';
 import Card from './components/card';
 import UserForm from './components/usestates';

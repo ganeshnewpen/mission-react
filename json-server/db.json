@@ -1,29 +1,14 @@
 {
   "users": [
     {
-      "name": "Nayda Alston",
-      "email": "qasynycaq@mailinator.com",
-      "id": 3
+      "id": 1,
+      "name": "Lynn Mckay",
+      "email": "nikopowofa@mailinator.com"
     },
     {
-      "name": "Madaline Anthony",
-      "email": "lyva@mailinator.com",
-      "id": 4
-    },
-    {
-      "name": "Cassidy Hubbard",
-      "email": "gafoka@mailinator.com",
-      "id": 5
-    },
-    {
-      "name": "Zena Thornton",
-      "email": "cumi@mailinator.com",
-      "id": 7
-    },
-    {
-      "name": "Elaine Nolan",
-      "email": "qebis@mailinator.com",
-      "id": 8
+      "name": "Hiram Garza",
+      "email": "xewagy@mailinator.com",
+      "id": 2
     }
   ]
 }
