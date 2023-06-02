@@ -54,6 +54,14 @@ const Navbar = () => {
                     </Link>
                   </li>
                 </ul>
+
+                <ul className="mx-auto">
+                <li className="nav-item">
+                    <Link to="/login" className="btn btn-primary">
+                      Login
+                    </Link>
+                  </li>
+                </ul>
               </div>
             </nav>
           </div>

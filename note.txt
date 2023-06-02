@@ -1,16 +1,18 @@
 json server 
 (creates local server,)
 
-
 make a form and store in json server.
 
 react table
+
+auth token
+
+routing, restful API
 
 custom hooks
 
 redux
 
-routing, restful API
+componet lazy loading
 
-auth token
 

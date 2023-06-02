@@ -24,10 +24,10 @@ export default function InsertForm() {
   }, [isSubmitting]);
 
   const onSubmit = (data, event) => {
-    event.preventDefault(); // Prevent default form submission
+    event.preventDefault(); 
 
     setIsSubmitting(true);
-    setErrorMessage(''); // Reset error message
+    setErrorMessage(''); 
     axios.get('http://localhost:3001/users?email=' + data.email)
       .then((response) => {
         if (response.data.length > 0) {
@@ -39,7 +39,7 @@ export default function InsertForm() {
               reset();
               setSuccessMessage('Form submitted successfully');
               setTimeout(() => {
-                setSuccessMessage(''); // Clear the success message after 2 seconds
+                setSuccessMessage(''); 
               }, 2000);
 
             })
