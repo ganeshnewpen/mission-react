@@ -3,13 +3,17 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { useTable } from 'react-table';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 const UserList = () => {
   const [users, setUsers] = useState([]);
   const [deleteSuccess, setDeleteSuccess] = useState(false);
-  const [selectedUser, setSelectedUser] = useState(null); // Added state for selected user
-  const [editName, setEditName] = useState(''); // Added state for edit name
-  const [editEmail, setEditEmail] = useState(''); // Added state for edit email
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [editName, setEditName] = useState('');
+  const [editEmail, setEditEmail] = useState('');
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     fetchUsers();
@@ -45,6 +49,7 @@ const UserList = () => {
     setSelectedUser(user);
     setEditName(user.name);
     setEditEmail(user.email);
+    setShowModal(true);
   };
 
   const handleUpdate = () => {
@@ -63,6 +68,7 @@ const UserList = () => {
         setEditName('');
         setEditEmail('');
         setSelectedUser(null);
+        setShowModal(false);
       })
       .catch((error) => {
         console.error('Error updating user:', error);
@@ -73,7 +79,7 @@ const UserList = () => {
     () => [
       {
         Header: 'Name',
-        accessor: 'name', // accessor is the "key" in the data
+        accessor: 'name',
       },
       {
         Header: 'Email',
@@ -85,8 +91,6 @@ const UserList = () => {
           <>
             <button
               className="btn btn-primary btn-sm me-3"
-              data-bs-toggle="modal"
-              data-bs-target="#editModal"
               onClick={() => handleEdit(row.original)}
             >
               <FontAwesomeIcon icon={faPen} />
@@ -127,91 +131,69 @@ const UserList = () => {
         </div>
       )}
 
-  {users.length === 0 ? (
+      {users.length === 0 ? (
         <p>No users found.</p>
       ) : (
-      <table className="table" {...getTableProps()}>
-        <thead>
-          {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps()}>{column.render('Header')}</th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {rows.map((row) => {
-            prepareRow(row);
-            return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map((cell) => {
-                  return (
-                    <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                  );
-                })}
+        <table className="table" {...getTableProps()}>
+          <thead>
+            {headerGroups.map((headerGroup) => (
+              <tr {...headerGroup.getHeaderGroupProps()}>
+                {headerGroup.headers.map((column) => (
+                  <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+                ))}
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
-      )
-      }
+            ))}
+          </thead>
+          <tbody {...getTableBodyProps()}>
+            {rows.map((row) => {
+              prepareRow(row);
+              return (
+                <tr {...row.getRowProps()}>
+                  {row.cells.map((cell) => {
+                    return (
+                      <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                    );
+                  })}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      )}
 
       {/* Edit Modal */}
-      <div
-        className="modal fade"
-        id="editModal"
-        tabIndex="-1"
-        role="dialog"
-        aria-labelledby="editModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="editModalLabel">
-                Edit | <span className="bg-light p-1 small rounded">{editName}</span>
-              </h5>
-              <button type="button" className="close bg-transparent border-0" data-bs-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div className="modal-body">
-              <form className='form-ui'>
-                <div className="form-group">
-                  <label htmlFor="editName">Name</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="editName"
-                    value={editName}
-                    onChange={(e) => setEditName(e.target.value)}
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="editEmail">Email</label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    id="editEmail"
-                    value={editEmail}
-                    onChange={(e) => setEditEmail(e.target.value)}
-                  />
-                </div>
-              </form>
-            </div>
-            <div className="modal-footer">
-              <button type="button" className="btn btn-primary" onClick={handleUpdate}>
-                Update
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Modal show={showModal} onHide={() => setShowModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit | <span className="bg-light p-1 small rounded">{editName}</span></Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group controlId="editName">
+              <Form.Label>Name</Form.Label>
+              <Form.Control
+                type="text"
+                value={editName}
+                onChange={(e) => setEditName(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group controlId="editEmail">
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                type="email"
+                value={editEmail}
+                onChange={(e) => setEditEmail(e.target.value)}
+              />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={handleUpdate}>
+            Update
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };
 
 export default UserList;
-
