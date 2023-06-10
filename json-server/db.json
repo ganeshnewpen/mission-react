@@ -2,13 +2,13 @@
   "users": [
     {
       "id": 1,
-      "name": "Amir Campbell",
-      "email": "notazafil@mailinator.com"
-    },
-    {
-      "id": 2,
-      "name": "Kasimir Douglas",
-      "email": "caki@mailinator.com"
+      "name": "Callum Koch",
+      "email": "vyge@mailinator.com"
     }
-  ]
+  ],
+  "auth": {
+    "username": "admin",
+    "password": "admin",
+    "token": "ABC3978"
+  }
 }

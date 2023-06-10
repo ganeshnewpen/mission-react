@@ -1,64 +1,71 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { Form, Button, Alert } from 'react-bootstrap';
 
 const Login = ({ setLoggedIn }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate();
+  const [showAlert, setShowAlert] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Email:', email);
-    console.log('Password:', password);
 
-    if (email === 'test@gmail.com' && password === 'test') {
-      setLoggedIn(true);
-      navigate('/');
-    } else {
+    try {
+      const response = await axios.get('http://localhost:3001/auth');
+      const { username, password: dbPassword, token } = response.data;
+
+      if (email === username && password === dbPassword) {
+        setLoggedIn(true);
+        localStorage.setItem('token', token); // Store the token in localStorage
+        window.location.href = '/admin';
+      } else {
+        setEmail('');
+        setPassword('');
+        setShowAlert(true);
+      }
+    } catch (error) {
+      console.error('Error:', error);
       setEmail('');
       setPassword('');
-      alert('Invalid credentials. Please try again.');
+      setShowAlert(true);
     }
   };
 
   return (
-    <section className="my-5 py-5">
+    <section className="my-5 min-vh-100">
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-lg-6">
-            <form onSubmit={handleSubmit} className="bg-light rounded shadow p-4">
-              <div className="mb-3">
-                <label htmlFor="email" className="form-label">
-                  Email address
-                </label>
-                <input
-                  type="email"
-                  className="form-control"
-                  id="email"
+            <Form onSubmit={handleSubmit} className="bg-light rounded shadow p-4">
+              {showAlert && (
+                <Alert variant="danger">
+                  Invalid credentials. Please try again.
+                </Alert>
+              )}
+              <Form.Group controlId="email" className="mb-3">
+                <Form.Label className="fw-bold">Email address</Form.Label>
+                <Form.Control
+                  type="text"
                   placeholder="Enter your email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
                 />
-              </div>
-              <div className="mb-3">
-                <label htmlFor="password" className="form-label">
-                  Password
-                </label>
-                <input
+              </Form.Group>
+              <Form.Group controlId="password" className="mb-3">
+                <Form.Label className="fw-bold">Password</Form.Label>
+                <Form.Control
                   type="password"
-                  className="form-control"
-                  id="password"
                   placeholder="Enter your password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
                 />
-              </div>
-              <button type="submit" className="btn btn-primary">
+              </Form.Group>
+              <Button type="submit" variant="primary">
                 Login
-              </button>
-            </form>
+              </Button>
+            </Form>
           </div>
         </div>
       </div>

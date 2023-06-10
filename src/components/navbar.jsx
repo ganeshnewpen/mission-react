@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 const MyLogo = ({ name, imageUrl }) => {
   return (
@@ -9,10 +9,28 @@ const MyLogo = ({ name, imageUrl }) => {
   );
 };
 
+
 const Navbar = () => {
   const myLogo = {
     name: 'Ganesh Neupane',
     imageUrl: 'https://blog.ganeshneupane.com.np/assets/img/gitavatar.jpg'
+  };
+
+  const [loggedIn, setLoggedIn] = useState(false);
+  const navigate = useNavigate();
+
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      setLoggedIn(true);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setLoggedIn(false);
+    navigate('/login');
   };
 
   return (
@@ -39,28 +57,30 @@ const Navbar = () => {
               <div className="collapse navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav mx-auto">
                   <li className="nav-item">
-                    <Link to="/" className="nav-link" activeClassName="active">
-                      Home
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link to="/about" className="nav-link" activeClassName="active">
+                    <Link to="/about" className="nav-link">
                       About
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link to="/contact" className="nav-link" activeClassName="active">
+                    <Link to="/contact" className="nav-link">
                       Contact
                     </Link>
                   </li>
                 </ul>
-
                 <ul className="mx-auto">
-                <li className="nav-item">
-                    <Link to="/login" className="btn btn-primary">
-                      Login
-                    </Link>
-                  </li>
+                  {loggedIn ? (
+                    <li className="nav-item">
+                      <button className="btn btn-danger" onClick={handleLogout}>
+                        Logout
+                      </button>
+                    </li>
+                  ) : (
+                    <li className="nav-item">
+                      <Link to="/login" className="btn btn-primary">
+                        Login
+                      </Link>
+                    </li>
+                  )}
                 </ul>
               </div>
             </nav>
