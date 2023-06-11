@@ -6,10 +6,12 @@ import { useTable } from 'react-table';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Alert from 'react-bootstrap/Alert';
 
 const UserList = () => {
   const [users, setUsers] = useState([]);
   const [deleteSuccess, setDeleteSuccess] = useState(false);
+  const [updateSuccess, setUpdateSuccess] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const [editName, setEditName] = useState('');
   const [editEmail, setEditEmail] = useState('');
@@ -53,8 +55,10 @@ const UserList = () => {
   };
 
   const handleUpdate = () => {
-    if (!selectedUser) return;
-
+    if (!selectedUser || (selectedUser.name === editName && selectedUser.email === editEmail)) {
+      // No changes made, return or display an appropriate message
+      return; 
+    }
     const updatedUser = {
       id: selectedUser.id,
       name: editName,
@@ -69,6 +73,10 @@ const UserList = () => {
         setEditEmail('');
         setSelectedUser(null);
         setShowModal(false);
+        setUpdateSuccess(true);
+        setTimeout(() => {
+          setUpdateSuccess(false);
+        }, 2000);
       })
       .catch((error) => {
         console.error('Error updating user:', error);
@@ -129,6 +137,12 @@ const UserList = () => {
         <div className="alert alert-success" role="alert">
           User deleted successfully!
         </div>
+      )}
+
+      {updateSuccess && (
+        <Alert variant="success" onClose={() => setUpdateSuccess(false)} dismissible>
+          User updated successfully!
+        </Alert>
       )}
 
       {users.length === 0 ? (

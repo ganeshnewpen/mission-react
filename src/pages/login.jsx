@@ -6,6 +6,8 @@ const Login = ({ setLoggedIn }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showAlert, setShowAlert] = useState(false);
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+  const [showSuccessAlertTimeout, setShowSuccessAlertTimeout] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,7 +19,11 @@ const Login = ({ setLoggedIn }) => {
       if (email === username && password === dbPassword) {
         setLoggedIn(true);
         localStorage.setItem('token', token); // Store the token in localStorage
-        window.location.href = '/admin';
+        setShowSuccessAlert(true);
+        const timeoutId = setTimeout(() => {
+          window.location.href = '/admin';
+        }, 2000); // Redirect after 2 seconds
+        setShowSuccessAlertTimeout(timeoutId);
       } else {
         setEmail('');
         setPassword('');
@@ -31,6 +37,15 @@ const Login = ({ setLoggedIn }) => {
     }
   };
 
+  const clearAlerts = () => {
+    setShowAlert(false);
+    setShowSuccessAlert(false);
+    if (showSuccessAlertTimeout) {
+      clearTimeout(showSuccessAlertTimeout);
+      setShowSuccessAlertTimeout(null);
+    }
+  };
+
   return (
     <section className="my-5 min-vh-100">
       <div className="container">
@@ -38,8 +53,13 @@ const Login = ({ setLoggedIn }) => {
           <div className="col-lg-6">
             <Form onSubmit={handleSubmit} className="bg-light rounded shadow p-4">
               {showAlert && (
-                <Alert variant="danger">
+                <Alert variant="danger" onClose={clearAlerts} dismissible>
                   Invalid credentials. Please try again.
+                </Alert>
+              )}
+              {showSuccessAlert && (
+                <Alert variant="success" onClose={clearAlerts} dismissible>
+                  Login success. Redirecting...
                 </Alert>
               )}
               <Form.Group controlId="email" className="mb-3">
