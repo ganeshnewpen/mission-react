@@ -14,5 +14,3 @@ custom hooks
 redux
 
 componet lazy loading
-
-
