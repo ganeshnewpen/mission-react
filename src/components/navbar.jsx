@@ -28,9 +28,12 @@ const Navbar = () => {
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    setLoggedIn(false);
-    navigate('/login');
+    const confirmed = window.confirm('Are you sure you want to logout?');
+    if (confirmed) {
+      localStorage.removeItem('token');
+      setLoggedIn(false);
+      navigate('/login');
+    }
   };
 
   return (
