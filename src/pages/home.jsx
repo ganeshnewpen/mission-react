@@ -6,8 +6,6 @@ import Card from '../components/card';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
-
-// Lazy load the UserList component
 const UserList = lazy(() => import("./userlist"));
 
 const Home = () => {
