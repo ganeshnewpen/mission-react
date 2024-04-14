@@ -16,25 +16,30 @@ const UserList = () => {
   const [editName, setEditName] = useState('');
   const [editEmail, setEditEmail] = useState('');
   const [showModal, setShowModal] = useState(false);
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+
 
   useEffect(() => {
     fetchUsers();
   }, []);
 
-  const fetchUsers = () => {
-    axios
-      .get('http://localhost:3001/users?_sort=id&_order=desc')
-      .then((response) => {
-        setUsers(response.data);
-      })
-      .catch((error) => {
-        console.error('Error fetching users data:', error);
-      });
+  const fetchUsers = async () => {
+    try {
+      const response = await axios.get('http://localhost:3005/users?_sort=id&_order=desc');
+      setUsers(response.data);
+    } catch (error) {
+      console.error('Error fetching users data:', error);
+    }
   };
 
   const handleDelete = (userId) => {
+    setSelectedUser(userId);
+    setShowConfirmationModal(true);
+  };
+
+  const confirmDelete = () => {
     axios
-      .delete(`http://localhost:3001/users/${userId}`)
+      .delete(`http://localhost:3005/users/${selectedUser}`)
       .then(() => {
         fetchUsers();
         setDeleteSuccess(true);
@@ -44,6 +49,10 @@ const UserList = () => {
       })
       .catch((error) => {
         console.error('Error deleting user:', error);
+      })
+      .finally(() => {
+        setSelectedUser(null);
+        setShowConfirmationModal(false);
       });
   };
 
@@ -54,33 +63,27 @@ const UserList = () => {
     setShowModal(true);
   };
 
-  const handleUpdate = () => {
-    if (!selectedUser || (selectedUser.name === editName && selectedUser.email === editEmail)) {
-      // No changes made, return or display an appropriate message
-      return; 
-    }
+  const handleUpdate = async () => {
     const updatedUser = {
       id: selectedUser.id,
       name: editName,
       email: editEmail,
     };
 
-    axios
-      .put(`http://localhost:3001/users/${selectedUser.id}`, updatedUser)
-      .then(() => {
-        fetchUsers();
-        setEditName('');
-        setEditEmail('');
-        setSelectedUser(null);
-        setShowModal(false);
-        setUpdateSuccess(true);
-        setTimeout(() => {
-          setUpdateSuccess(false);
-        }, 2000);
-      })
-      .catch((error) => {
-        console.error('Error updating user:', error);
-      });
+    try {
+      await axios.put(`http://localhost:3005/users/${selectedUser.id}`, updatedUser);
+      fetchUsers(); // Fetch updated user data
+      setEditName(''); // Clear input fields
+      setEditEmail('');
+      setSelectedUser(null);
+      setShowModal(false);
+      setUpdateSuccess(true);
+      setTimeout(() => {
+        setUpdateSuccess(false);
+      }, 2000);
+    } catch (error) {
+      console.error('Error updating user:', error);
+    }
   };
 
   const columns = React.useMemo(
@@ -206,6 +209,26 @@ const UserList = () => {
           </Button>
         </Modal.Footer>
       </Modal>
+
+
+       {/* Confirmation Modal */}
+       <Modal show={showConfirmationModal} onHide={() => setShowConfirmationModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Confirm Deletion</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Are you sure you want to delete this user?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowConfirmationModal(false)}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={confirmDelete}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      
     </div>
   );
 };

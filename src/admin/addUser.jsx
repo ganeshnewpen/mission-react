@@ -45,14 +45,14 @@ const AddUser = () => {
     setIsSubmitting(true);
     setErrorMessage('');
     axios
-      .get('http://localhost:3001/users?email=' + data.email)
+      .get('http://localhost:3005/users?email=' + data.email)
       .then((response) => {
         if (response.data.length > 0) {
           setErrorMessage('Email already exists!');
           setIsSubmitting(false);
         } else {
           axios
-            .post('http://localhost:3001/users', data)
+            .post('http://localhost:3005/users', data)
             .then((response) => {
               reset();
               setSuccessMessage('User added successfully');
