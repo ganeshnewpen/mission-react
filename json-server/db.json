@@ -49,6 +49,16 @@
       "id": 10,
       "name": "Kiona Ware",
       "email": "kiona@gmail.com"
+    },
+    {
+      "name": "Whitney Alexander",
+      "email": "vazuketu@mailinator.com",
+      "id": 11
+    },
+    {
+      "name": "Hyatt Lucas",
+      "email": "nityk@mailinator.com",
+      "id": 12
     }
   ],
   "auth": {

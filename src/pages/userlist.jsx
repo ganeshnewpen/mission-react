@@ -132,7 +132,7 @@ const UserList = () => {
   });
 
   return (
-    <div className="mt-4 pb-5">
+    <>
       <h4>User List</h4>
       <hr />
 
@@ -229,7 +229,7 @@ const UserList = () => {
         </Modal.Footer>
       </Modal>
       
-    </div>
+    </>
   );
 };
 
