@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 
-const AddUser = () => {
+const AddUser = ({ onUserAdded }) => {
   const navigate = useNavigate();
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -58,6 +58,8 @@ const AddUser = () => {
               setSuccessMessage('User added successfully');
               setTimeout(() => {
                 setSuccessMessage('');
+                // Call the callback function to notify parent component
+                onUserAdded();
               }, 2000);
             })
             .catch(handleError);
@@ -80,50 +82,44 @@ const AddUser = () => {
   };
 
   return (
-    <div className="container min-vh-100 my-5">
-      <div className="row justify-content-center">
-        <div className="col-lg-6">
-          <div className="card">
-            <div className="card-header">
-              <h4>Add User</h4>
-            </div>
-            <div className="card-body">
-              {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
-              <Form onSubmit={handleSubmit(onSubmit)} autoComplete="off" className="form-ui">
-                {successMessage && <Alert variant="success">{successMessage}</Alert>}
+    <div className="card">
+      <div className="card-header">
+        <h4>Add User</h4>
+      </div>
+      <div className="card-body">
+        {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
+        <Form onSubmit={handleSubmit(onSubmit)} autoComplete="off" className="form-ui">
+          {successMessage && <Alert variant="success">{successMessage}</Alert>}
 
-                <Form.Group controlId="name" className="mb-3">
-                  <Form.Label>Name</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Enter your full name"
-                    {...register('name', {
-                      required: true,
-                      validate: name
-                    })}
-                  />
-                  {errors.name && <Form.Text className="text-danger">{errors.name.message}</Form.Text>}
-                </Form.Group>
+          <Form.Group controlId="name" className="mb-3">
+            <Form.Label>Name</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter your full name"
+              {...register('name', {
+                required: true,
+                validate: name
+              })}
+            />
+            {errors.name && <Form.Text className="text-danger">{errors.name.message}</Form.Text>}
+          </Form.Group>
 
-                <Form.Group controlId="email">
-                  <Form.Label>Email</Form.Label>
-                  <Form.Control
-                    type="email"
-                    placeholder="xyz@gmail.com"
-                    {...register('email', {
-                      required: true
-                    })}
-                  />
-                  {errors.email && <Form.Text className="text-danger">{errors.email.message}</Form.Text>}
-                </Form.Group>
+          <Form.Group controlId="email">
+            <Form.Label>Email</Form.Label>
+            <Form.Control
+              type="email"
+              placeholder="xyz@gmail.com"
+              {...register('email', {
+                required: true
+              })}
+            />
+            {errors.email && <Form.Text className="text-danger">{errors.email.message}</Form.Text>}
+          </Form.Group>
 
-                <Button className="btn btn-success mt-3" type="submit">
-                  {showSubmittingMessage && !errorMessage ? 'Submitting...' : 'Submit'}
-                </Button>
-              </Form>
-            </div>
-          </div>
-        </div>
+          <Button className="btn btn-success mt-3" type="submit">
+            {showSubmittingMessage && !errorMessage ? 'Submitting...' : 'Submit'}
+          </Button>
+        </Form>
       </div>
     </div>
   );

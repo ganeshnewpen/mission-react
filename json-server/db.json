@@ -4,6 +4,51 @@
       "id": 1,
       "name": "user1",
       "email": "user1@gmail.com"
+    },
+    {
+      "name": "Caesar Roy",
+      "email": "fuky@mailinator.com",
+      "id": 2
+    },
+    {
+      "name": "Shannon Carrillo",
+      "email": "qofy@mailinator.com",
+      "id": 3
+    },
+    {
+      "name": "Leroy Durham",
+      "email": "medena@mailinator.com",
+      "id": 4
+    },
+    {
+      "name": "Thane Willis",
+      "email": "hujoxejaby@mailinator.com",
+      "id": 5
+    },
+    {
+      "name": "Kyle Vega",
+      "email": "jizocyzof@mailinator.com",
+      "id": 6
+    },
+    {
+      "name": "Nash Burris",
+      "email": "sylyrubi@mailinator.com",
+      "id": 7
+    },
+    {
+      "name": "Joel Robinson",
+      "email": "nylupif@mailinator.com",
+      "id": 8
+    },
+    {
+      "name": "Rosalyn Gutierrez",
+      "email": "xanog@mailinator.com",
+      "id": 9
+    },
+    {
+      "id": 10,
+      "name": "Kiona Ware",
+      "email": "kiona@gmail.com"
     }
   ],
   "auth": {
