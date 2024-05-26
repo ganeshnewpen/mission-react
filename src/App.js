@@ -8,6 +8,7 @@ const Home = lazy(() => import('./pages/home'));
 const AboutPage = lazy(() => import('./pages/about.jsx'));
 const Login = lazy(() => import('./pages/login.jsx'));
 const AddUser = lazy(() => import('./admin/addUser'));
+const Dashboard = lazy(() => import('./admin/dashboard'));  
 
 const App = () => {
   const [isLoggedIn, setLoggedIn] = useState(false);
@@ -23,6 +24,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/admin" element={<AddUser isLoggedIn={isLoggedIn} />} />
+          <Route path="/dashboard" element={<Dashboard isLoggedIn={isLoggedIn} />} />
           <Route path="/login" element={<Login setLoggedIn={setLoggedIn} />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

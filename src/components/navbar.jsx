@@ -9,7 +9,6 @@ const MyLogo = ({ name, imageUrl }) => {
   );
 };
 
-
 const Navbar = () => {
   const myLogo = {
     name: 'Ganesh Neupane',
@@ -70,13 +69,21 @@ const Navbar = () => {
                     </Link>
                   </li>
                 </ul>
-                <ul className="mx-auto">
+                <ul className="mx-auto d-flex align-items-center gap-2 list-unstyled">
                   {loggedIn ? (
-                    <li className="nav-item">
-                      <button className="btn btn-danger" onClick={handleLogout}>
-                        Logout
-                      </button>
-                    </li>
+                    <>
+                      <li className="nav-item">
+                        <button className="btn btn-danger" onClick={handleLogout}>
+                          Logout
+                        </button>
+                      </li>
+
+                      <li className="nav-item">
+                        <Link to="/dashboard" className="nav-link">
+                          Dashboard
+                        </Link>
+                      </li>
+                    </>
                   ) : (
                     <li className="nav-item">
                       <Link to="/login" className="btn btn-primary">
