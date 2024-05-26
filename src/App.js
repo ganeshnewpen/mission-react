@@ -6,6 +6,8 @@ import NotFound from './pages/404.jsx';
 
 const Home = lazy(() => import('./pages/home'));
 const AboutPage = lazy(() => import('./pages/about.jsx'));
+const ContactPage = lazy(() => import('./pages/contact.jsx'));
+
 const Login = lazy(() => import('./pages/login.jsx'));
 const Dashboard = lazy(() => import('./admin/dashboard.jsx'));
 
@@ -25,6 +27,8 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+
           {/* admin routes */}
           <Route path="/dashboard/*" element={<Dashboard isLoggedIn={isLoggedIn} />} />
           <Route path="/admin/*" element={<Dashboard isLoggedIn={isLoggedIn} />} />

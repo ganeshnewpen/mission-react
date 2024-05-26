@@ -22,7 +22,6 @@ const Home = () => {
                 <FontAwesomeIcon icon={faSpinner} />
               </div>
             }>
-              <UserList />
             </Suspense>
           </div>
         </div>
