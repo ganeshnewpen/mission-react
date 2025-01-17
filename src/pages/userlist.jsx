@@ -57,11 +57,31 @@ const UserList = () => {
   };
 
   const handleEdit = (user) => {
+    console.log(user.name);
     setSelectedUser(user);
     setEditName(user.name);
     setEditEmail(user.email);
     setShowModal(true);
   };
+
+
+  const deleteAll = async () => {
+    if (window.confirm("Are you sure you want to delete all users?")) {
+      try {
+        for (const user of users) {
+          await axios.delete(`http://localhost:3005/users/${user.id}`);
+        }
+        setUsers([]);
+        setDeleteSuccess(true);
+        setTimeout(() => {
+          setDeleteSuccess(false);
+        }, 2000);
+      } catch (error) {
+        console.error('Error deleting all users:', error);
+      }
+    }
+  };
+
 
   const handleUpdate = async () => {
     const updatedUser = {
@@ -69,6 +89,7 @@ const UserList = () => {
       name: editName,
       email: editEmail,
     };
+
 
     try {
       await axios.put(`http://localhost:3005/users/${selectedUser.id}`, updatedUser);
@@ -100,19 +121,21 @@ const UserList = () => {
         Header: 'Actions',
         Cell: ({ row }) => (
           <>
-            <button
-              className="btn btn-primary btn-sm me-3"
+            <div className="d-inline-flex gap-2">
+              <button
+              className="btn btn-primary btn-sm"
               onClick={() => handleEdit(row.original)}
             >
               <FontAwesomeIcon icon={faPen} />
             </button>
 
-            <button
-              className="btn btn-danger btn-sm me-2"
-              onClick={() => handleDelete(row.original.id)}
-            >
-              <FontAwesomeIcon icon={faTrash} />
-            </button>
+              <button
+                className="btn btn-danger btn-sm"
+                onClick={() => handleDelete(row.original.id)}
+              >
+                <FontAwesomeIcon icon={faTrash} />
+              </button></div>
+
           </>
         ),
       },
@@ -133,7 +156,13 @@ const UserList = () => {
 
   return (
     <>
-      <h4>User List</h4>
+      <div className="d-flex justify-content-between align-items-center">
+        <h4>User List</h4>
+
+        {users.length > 1 ? (
+          <button className="btn btn-danger" onClick={deleteAll}>Delete All</button>
+        ) : ''}
+      </div>
       <hr />
 
       {deleteSuccess && (
@@ -211,8 +240,8 @@ const UserList = () => {
       </Modal>
 
 
-       {/* Confirmation Modal */}
-       <Modal show={showConfirmationModal} onHide={() => setShowConfirmationModal(false)}>
+      {/* Confirmation Modal */}
+      <Modal show={showConfirmationModal} onHide={() => setShowConfirmationModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Confirm Deletion</Modal.Title>
         </Modal.Header>
@@ -228,7 +257,7 @@ const UserList = () => {
           </Button>
         </Modal.Footer>
       </Modal>
-      
+
     </>
   );
 };

@@ -9,6 +9,9 @@ import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 const UserList = lazy(() => import("./userlist"));
 
 const Home = () => {
+
+  console.log("hello")
+
   return (
     <div>
       <Landing />

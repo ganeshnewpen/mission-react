@@ -1,64 +1,37 @@
 {
   "users": [
     {
-      "id": 1,
-      "name": "user1",
-      "email": "user1@gmail.com"
+      "name": "Iona Randall",
+      "email": "tateme@mailinator.com",
+      "id": 1
     },
     {
-      "name": "Caesar Roy",
-      "email": "fuky@mailinator.com",
+      "name": "Sierra Moss",
+      "email": "myceveke@mailinator.com",
       "id": 2
     },
     {
-      "name": "Shannon Carrillo",
-      "email": "qofy@mailinator.com",
+      "name": "myceveke@mailinator.com\t",
+      "email": "milywek@mailinator.com",
       "id": 3
+    }
+  ],
+  "cards":[
+    {
+      "id": 1,
+      "title": "Card 1",
+      "image": "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg",
+      "description": "This is a sample card"
     },
     {
-      "name": "Leroy Durham",
-      "email": "medena@mailinator.com",
-      "id": 4
+      "id": 2,
+      "title": "Card 2",
+      "description": "Another sample card"
     },
     {
-      "name": "Thane Willis",
-      "email": "hujoxejaby@mailinator.com",
-      "id": 5
-    },
-    {
-      "name": "Kyle Vega",
-      "email": "jizocyzof@mailinator.com",
-      "id": 6
-    },
-    {
-      "name": "Nash Burris",
-      "email": "sylyrubi@mailinator.com",
-      "id": 7
-    },
-    {
-      "name": "Joel Robinson",
-      "email": "nylupif@mailinator.com",
-      "id": 8
-    },
-    {
-      "name": "Rosalyn Gutierrez",
-      "email": "xanog@mailinator.com",
-      "id": 9
-    },
-    {
-      "id": 10,
-      "name": "Kiona Ware",
-      "email": "kiona@gmail.com"
-    },
-    {
-      "name": "Whitney Alexander",
-      "email": "vazuketu@mailinator.com",
-      "id": 11
-    },
-    {
-      "name": "Hyatt Lucas",
-      "email": "nityk@mailinator.com",
-      "id": 12
+      "id": 3,
+      "title": "Card 3",
+      "description": "Yet another sample card"
     }
   ],
   "auth": {

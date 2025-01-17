@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const Card = ({ title, image, description }) => {
   return (
@@ -13,31 +14,33 @@ const Card = ({ title, image, description }) => {
 };
 
 const Cards = () => {
+  const [cards, setCards] = useState([]);
+
+  useEffect(() => {
+    const fetchCards = async () => {
+      try {
+        const response = await axios.get('http://localhost:3005/cards');
+        setCards(response.data);
+      } catch (error) {
+        console.error('Error fetching cards:', error);
+      }
+    };
+
+    fetchCards();
+  }, []);
+
   return (
     <div className="container my-5 sect-card">
       <div className="row">
-        <div className="col-sm-4">
-          <Card
-            title="My Card"
-            image="https://img.choice.com.au/-/media/ecc68d2bdc5145db9aa945049927273f.ashx?w=760"
-            description="My card desc"
-          />
-        </div>
-        <div className="col-sm-4">
-          <Card
-            title="My Card 2"
-            image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgmTHN1Og9F5yeKpVaCt93eHnn_NiBPou1mw&usqp=CAU"
-            description="My card desc2"
-          />
-        </div>
-
-        <div className="col-sm-4">
-          <Card
-            title="My Card 3"
-            image="path/to/image3.jpg"
-            description="This is the description for Example Card 3."
-          />
-        </div>
+        {cards.map((card) => (
+          <div className="col-sm-4" key={card.id}>
+            <Card
+              title={card.title}
+              image={card.image ?? 'https://media.istockphoto.com/id/1396814518/vector/image-coming-soon-no-photo-no-thumbnail-image-available-vector-illustration.jpg?s=612x612&w=0&k=20&c=hnh2OZgQGhf0b46-J2z7aHbIWwq8HNlSDaNp2wn_iko='}
+              description={card.description}
+            />
+          </div>
+        ))}
       </div>
     </div>
   );

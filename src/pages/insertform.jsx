@@ -16,7 +16,7 @@ export default function InsertForm() {
       timeoutId = setTimeout(() => {
         setShowSubmittingMessage(false);
         setIsSubmitting(false);
-      }, 1000);
+      }, 100);
     }
     return () => {
       clearTimeout(timeoutId);
@@ -40,7 +40,7 @@ export default function InsertForm() {
               setSuccessMessage('Form submitted successfully');
               setTimeout(() => {
                 setSuccessMessage(''); 
-              }, 2000);
+              }, 200);
 
             })
             .catch(handleError);
